@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Update & install dependencies
+apt update && apt upgrade -y
+apt install -y curl sudo wget gnupg
+
+# Install PufferPanel
+bash <(curl -s https://raw.githubusercontent.com/JishnuTheGamer/puffer-panel/refs/heads/main/install)
+
+# Auto-start
+sudo systemctl enable --now pufferpanel
+
+# Message
+echo ""
+echo "TypeHosting Installed Successfully!"
+echo "Access your panel at: http://<your-ip>:8080"
