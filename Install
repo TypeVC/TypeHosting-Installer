@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Update system
+apt update && apt upgrade -y
+apt install -y curl sudo wget gnupg python3
+
+# Install PufferPanel
+bash <(curl -s https://raw.githubusercontent.com/JishnuTheGamer/puffer-panel/refs/heads/main/install)
+
+# Enable and start PufferPanel
+sudo systemctl enable --now pufferpanel
+
+# Optional: Add playit tunnel (for custom IP)
+wget https://github.com/playit-cloud/playit-agent/releases/download/v0.15.26/playit-linux-amd64
+chmod +x playit-linux-amd64
+./playit-linux-amd64 &
+
+# Optional: Keep online 24/7
+python3 <(curl -s https://raw.githubusercontent.com/JishnuTheGamer/24-7/refs/heads/main/24) &
+
+# Done message
+echo ""
+echo " TypeHosting Installed!"
+echo " Access panel at: http://<your-ip>:8080"
+echo " Create admin now:"
+sudo pufferpanel user add
